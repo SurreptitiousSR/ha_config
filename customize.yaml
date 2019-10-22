@@ -1,0 +1,65 @@
+light.hgrp0000002046:
+  hidden: true
+light.dining_room:
+  hidden: true
+light.guest_bedroom:
+  hidden: true
+light.hallway:
+  hidden: true
+light.landing:
+  hidden: true
+light.living_room:
+  hidden: true
+light.master_bedroom:
+  hidden: true
+light.porch:
+  hidden: true
+light.study:
+  hidden: true
+media_player.firefox:
+  hidden: true
+media_player.yamaha_v677_zone_2:
+  hidden: true
+group.all_automations:
+  hidden: false
+group.all_scripts:
+  hidden: false
+group.all_lights:
+  friendly_name: Lights
+  hidden: false
+switch.fan:
+  friendly_name: Fan
+  icon: mdi:fan
+switch.study_lamp:
+  friendly_name: Study Lamp
+  icon: mdi:lamp
+switch.wemo1:
+  icon: mdi:lamp
+switch.lava_lamp:
+  icon: mdi:lava-lamp
+switch.dining_room_lamp:
+  icon: mdi:lamp
+
+person.sam:
+  entity_picture: /local/guybrush.jpeg
+person.vicki:
+  entity_picture: /local/vicki.jpeg
+
+# Octoprint customisation
+sensor.octoprint_actual_tool0_temp:
+  friendly_name: Tool Temperature
+
+sensor.octoprint_actual_bed_temp:
+  friendly_name: Bed Temperature
+
+sensor.octoprint_time_remaining:
+  friendly_name: Time Remaining
+
+sensor.octoprint_job_percentage:
+  friendly_name: Job Percentage
+
+sensor.octoprint_current_state:
+  friendly_name: Current State
+
+sensor.srv_cab_temp:
+  friendly_name: Temperature

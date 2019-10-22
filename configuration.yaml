@@ -1,0 +1,227 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: UTC
+  # Customization file
+  customize: !include customize.yaml
+
+# Include the following other YAML files
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+zone: !include zones.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+  themes: !include_dir_merge_named themes
+  
+# Enables configuration UI
+config:
+
+mobile_app:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  #  ssl_certificate: !secret ssl_certificate
+  #ssl_key: !secret ssl_key
+  #base_url: !secret base_url
+  ip_ban_enabled: True
+  login_attempts_threshold: 3
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+weather:
+  - platform: darksky
+    api_key: !secret dark_sky_api
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+
+# Cloud
+cloud:
+  alexa:
+    filter:
+      include_entities:
+        - script.night_fan
+        - script.home_shutdown
+        - group.dining_room_lights
+        - group.living_room_lights
+        - group.master_bedroom_lights
+        - group.study_lights
+        - group.downstairs
+        - group.upstairs
+      exclude_entities:
+        - light.hgrp0000002046
+      include_domains:
+        - light
+        - switch
+
+sensor:
+  - platform: darksky
+    api_key: !secret dark_sky_api
+    monitored_conditions:
+      - summary
+      - icon
+      - temperature
+
+
+  - platform: template
+    sensors:
+      sam_status:
+        value_template: '{{ states.input_select.sam_status_dropdown.state }}'
+        friendly_name: 'Sam'
+      vicki_status:
+        value_template: '{{ states.input_select.vicki_status_dropdown.state }}'
+        friendly_name: 'Vicki'
+
+  - platform: mqtt
+    name: srv-cab_temp
+    state_topic: "study/sensor-srv_cab_temp"
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    name: front_door
+    state_topic: "alarm/front_door"
+
+  - platform: mqtt
+    name: back_door
+    state_topic: "alarm/back_door"
+
+  - platform: mqtt
+    name: pir_kitchen
+    state_topic: "alarm/kitchen_motion"
+
+  - platform: mqtt
+    name: pir_lroom
+    state_topic: "alarm/lroom_motion"
+
+speedtestdotnet:
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+  scan_interval:
+    minutes: 30
+
+switch:
+        #  - platform: tplink
+        # host: !secret tplink_1
+        #- platform: tplink
+        #host: !secret tplink_2
+  - platform: mqtt
+    name: "Lava lamp"
+    command_topic: "cmnd/sonoff001/power"
+    state_topic: "stat/sonoff001/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Dining Room Lamp"
+    command_topic: "cmnd/sonoff002/power"
+    state_topic: "stat/sonoff002/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+    #  - platform: rest
+    #resouce: http://127.0.0.1:8126/container/grafana
+    #name: Grafana
+    #body_on: '{"state": "start"}'
+    #body_off: '{"state": "stop"}'
+    #is_on_template: '{{ value_json is not none and value_json.state == "running" }}'
+
+wemo:
+  static:
+    - !secret wemo_1
+
+hive:
+  username: !secret hive_user
+  password: !secret hive_pass
+  scan_interval: 1
+
+sonos:
+  media_player:
+    hosts:
+      - !secret sonos_1
+      - !secret sonos_2
+
+media_player:
+  - platform: yamaha
+    host: 192.168.1.146
+
+# device_tracker:
+#   - platform: unifi
+#     host: 192.168.1.214
+#     username: !secret unifi_user
+#     password: !secret unifi_password
+#     ssid_filter:
+#       - 'Piglet'
+#     verify_ssl: false
+
+system_health:
+
+person:
+
+octoprint:
+  host: 192.168.1.140
+  api_key: !secret octoprintapi
+  bed: true
+  number_of_tools: 1
+
+camera:
+  - platform: mjpeg
+    name: OctoPrint
+    still_image_url: http://192.168.1.140/webcam/?action=snapshot
+    mjpeg_url: http://192.168.1.140/webcam/?action=stream
+
+homekit:
+  port: 51827
+  filter:
+    include_domains:
+      - fan
+      - light
+      - switch
+      - climate

@@ -1,0 +1,36 @@
+- name: living room warmth
+  entities:
+    light.fireplace_left:
+      state: on
+      xy_color: [0.55,0.4]
+      brightness: 255
+    light.fireplace_right:
+      state: on
+      xy_color: [0.55,0.4]
+      brightness: 255
+
+- name: bedtime
+  entities:
+    light.hallway:
+      state: on
+      brightness: 190
+    light.landing:
+      state: on
+      brightness: 128
+    light.bedside:
+      state: on
+      brightness: 128
+      xy_color: [0.55,0.4]
+   
+- name: night lights
+  entities:
+    light.hallway:
+      state: on
+      brightness: 255
+    light.landing:
+      state: on
+      brightness: 255
+    light.porch:
+      state: on
+      brightness: 255
+ 

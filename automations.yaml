@@ -1,0 +1,52 @@
+- alias: 'sam arriving home'
+  trigger:
+    - platform: state
+      entity_id: person.sam
+      from: 'not_home'
+      to: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+      - condition: state
+        entity_id: 'sensor.front_door'
+        state: 'open'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: script.arrive_home
+    - service: script.sonos_say
+      data:
+        sonos_entity: media_player.kitchen
+        volume: 0.5
+        message: "Welcome back commander"
+        delay: "00:00:03"
+
+- alias: vicki arriving home
+  trigger:
+    - platform: state
+      entity_id: person.vicki
+      from: "not_home"
+      to: "home"
+  condition:
+    condition: sun
+    after: sunset
+  action:
+    - service: homeassistant.turn_on
+      entity_id: script.arrive_home
+    - service: script.sonos_say
+      data:
+        sonos_entity: media_player.kitchen
+        volume: 0.5
+        message: "Welcome back lady of the house"
+        delay: "00:00:10"
+
+- alias: leave home
+  trigger:
+    - platform: state
+      entity_id: device_tracker.sam_sp
+      from: "home"
+      to: "not_home"
+  action:
+    service: homeassistant.turn_on
+    entity_id: script.leave_home

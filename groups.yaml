@@ -1,0 +1,218 @@
+climate:
+  name: Climate
+  entities:
+    - climate.heating
+    - climate.hot_water
+    - sensor.hive_hub_status
+    - sensor.outside_temperature
+  
+weather:
+  name: Weather
+  entities:
+    - sun.sun
+    - weather.dark_sky
+
+network_status:
+  name: Network
+  entities:
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping  
+
+# Rooms
+dining_room:
+  name: Dining Room
+  entities:
+    - light.d1
+    - switch.dining_room_lamp
+
+guest_bedroom:
+  name: Guest Bedroom
+  entities:
+    - light.gb1
+
+hallway:
+  name: Hallway
+  entities:
+    - light.h1
+    - binary_sensor.hallway_sensor
+
+kitchen:
+  name: Kitchen
+  entities:
+    - media_player.kitchen
+
+landing:
+  name: Landing
+  entities:
+    - light.la1
+
+living_room:
+  name: Living Room
+  entities:
+    - light.l1
+    - light.l2
+    - switch.lava_lamp
+    - switch.wemo1
+    - media_player.chromecast_living_room
+    - media_player.living_room
+    - media_player.yamaha_receiver
+
+master_bedroom:
+  name: Master Bedroom
+  entities:
+    - light.mb1
+    - light.mb2
+    - media_player.bedroom
+    - switch.fan
+
+porch:
+  name: Porch
+  entities:
+    - light.p1
+
+study:
+  name: Study
+  entities:
+    - light.s1
+    - switch.study_lamp
+
+scenes:
+  name: Scenes
+  entities:
+    - scene.living_room_warmth
+    - scene.bedtime    
+    - scene.night_lights
+
+# Light zones
+downstairs:
+  name: Downstairs
+  entities:
+    - light.h1
+    - light.l1
+    - light.l2
+    - light.d1
+    - switch.wemo1
+    - switch.lava_lamp
+    - switch.dining_room_lamp
+
+upstairs:
+  name: Upstairs
+  entities:
+    - light.la1
+    - light.s1
+    - switch.study_lamp
+    - light.mb1
+    - light.mb2
+    - light.gb1
+
+# Light groups for Alexa
+living_room_lights:
+  name: Living Room Lights
+  entities:
+    - light.l1
+    - light.l2
+    - switch.lava_lamp
+    - switch.wemo1
+
+dining_room_lights:
+  name: Dining Room Lights
+  entities:
+    - light.d1
+    - switch.dining_room_lamp
+
+master_bedroom_lights:
+  name: Master Bedroom Lights
+  entities:
+    - light.mb1
+    - light.mb2
+
+study_lights:
+  name: Study Lights
+  entities:
+    - light.s1
+    - switch.study_lamp
+
+# People status
+people_status:
+  name: People Status
+  entities:
+    - person.sam
+    - person.vicki
+ 
+# Views
+default_view:
+  view: yes
+  icon: mdi:home
+  entities: 
+    - person.sam
+    - person.vicki
+    - group.climate
+    - group.weather
+    - group.porch
+    - group.living_room
+    - group.hallway
+    - group.dining_room
+    - group.kitchen
+    - group.landing
+    - group.master_bedroom
+    - group.guest_bedroom
+    - group.study
+    - group.network_status 
+
+light_view:
+  name: Lights
+  view: yes
+  icon: mdi:lamp
+  entities:
+    - group.all_lights
+    - switch.wemo1
+    - switch.study_lamp
+    - switch.lava_lamp
+    - switch.dining_room_lamp     
+
+climate_view:
+  name: Climate
+  view: yes
+  icon: mdi:oil-temperature
+  entities:
+    - group.climate
+    - switch.fan
+    - group.weather
+
+remote_control_view:
+  name: Controls
+  view: yes
+  icon: mdi:remote
+  entities:
+    - media_player.yamaha_receiver
+    - media_player.living_room  
+    - media_player.kitchen
+    - media_player.bedroom
+
+people_status_view:
+  name: People
+  view: yes
+  icon: mdi:account-multiple
+  entities:
+    - group.people_status
+
+network_view:
+  name: Network
+  view: yes
+  icon: mdi:server-network
+  entities:
+    - group.network_status
+  
+scene_view:
+  name: Scenes
+  view: yes
+  entities:
+    - group.scenes
+
+automation_view:
+  name: Automation
+  view: yes
+  entities:
+    - group.all_automations
+    - group.all_scripts
