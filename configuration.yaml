@@ -26,7 +26,7 @@ zone: !include zones.yaml
 # Enables the frontend
 frontend:
   themes: !include_dir_merge_named themes
-  
+
 # Enables configuration UI
 config:
 
@@ -117,11 +117,6 @@ sensor:
         friendly_name: 'Vicki'
 
   - platform: mqtt
-    name: srv-cab_temp
-    state_topic: "study/sensor-srv_cab_temp"
-    unit_of_measurement: "°C"
-
-  - platform: mqtt
     name: front_door
     state_topic: "alarm/front_door"
 
@@ -146,10 +141,6 @@ speedtestdotnet:
     minutes: 30
 
 switch:
-        #  - platform: tplink
-        # host: !secret tplink_1
-        #- platform: tplink
-        #host: !secret tplink_2
   - platform: mqtt
     name: "Lava lamp"
     command_topic: "cmnd/sonoff001/power"
@@ -166,12 +157,6 @@ switch:
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
-    #  - platform: rest
-    #resouce: http://127.0.0.1:8126/container/grafana
-    #name: Grafana
-    #body_on: '{"state": "start"}'
-    #body_off: '{"state": "stop"}'
-    #is_on_template: '{{ value_json is not none and value_json.state == "running" }}'
 
 wemo:
   static:
@@ -191,15 +176,6 @@ sonos:
 media_player:
   - platform: yamaha
     host: 192.168.1.146
-
-# device_tracker:
-#   - platform: unifi
-#     host: 192.168.1.214
-#     username: !secret unifi_user
-#     password: !secret unifi_password
-#     ssid_filter:
-#       - 'Piglet'
-#     verify_ssl: false
 
 system_health:
 

@@ -1,0 +1,27 @@
+# items marked with an ! are whitelisted and therefore not ignored 
+
+# These things are included in the backup
+!*.yaml
+!.gitignore
+!*.md
+
+# Ignore folders
+.storage
+.cloud
+.google.token
+.icloud
+SSL
+tts
+www
+certbot
+deps
+
+# These files will be ignored 
+ip_bans.yaml
+secrets.yaml
+plex.conf
+home-assistant_v2.db
+home-assistant.log
+.homekit.state
+.uuid
+.ios.conf
