@@ -16,7 +16,7 @@ homeassistant:
 # Include the following other YAML files
 group: !include groups.yaml
 automation: !include automations.yaml
-script: !include scripts.yaml
+script: !include_dir_merge_named scripts
 scene: !include scenes.yaml
 zone: !include zones.yaml
 
@@ -81,22 +81,6 @@ tts:
 
 # Cloud
 cloud:
-  alexa:
-    filter:
-      include_entities:
-        - script.night_fan
-        - script.home_shutdown
-        - group.dining_room_lights
-        - group.living_room_lights
-        - group.master_bedroom_lights
-        - group.study_lights
-        - group.downstairs
-        - group.upstairs
-      exclude_entities:
-        - light.hgrp0000002046
-      include_domains:
-        - light
-        - switch
 
 sensor:
   - platform: darksky

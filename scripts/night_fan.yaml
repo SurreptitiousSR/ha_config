@@ -1,0 +1,19 @@
+night_fan:
+  alias: 30 minute fan
+  sequence:
+    - event: LOGBOOK_ENTRY
+      event_data:
+        name: Sleep
+        message: cool air for sleeping
+        entity_id: device_tracker.sleep
+        domain: switch
+    - alias: Fan on
+      service: switch.turn_on
+      data:
+        entity_id: switch.fan
+    - delay:
+        minutes: 30
+    - alias: Fan off
+      service: switch.turn_off
+      data:
+        entity_id: switch.fan

@@ -1,0 +1,16 @@
+arrive_home:
+  alias: arriving home
+  sequence:
+    - event: LOGBOOK_ENTRY
+      event_data:
+        name: someone
+        message: is arriving home
+        domain: switch
+    - service: light.turn_on
+      data:
+        entity_id: light.p1, light.h1, light.la1
+    - delay:
+        minutes: 5
+    - service: light.turn_off
+      data:
+        entity_id: light.p1
